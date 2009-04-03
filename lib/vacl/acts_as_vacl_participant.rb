@@ -27,7 +27,7 @@ module ActsAsVaclParticipant
       has_many :vacl_thing_owners, :foreign_key => :creator_id
 
       def default_acl()
-        Acl.scope_default.find :first, :conditions => { :creator_id => self.id }
+        Vacl.scope_default.find :first, :conditions => { :creator_id => self.id }
       end
 
       def fetch_my_perms_for_thing( thing )

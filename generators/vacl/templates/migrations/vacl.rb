@@ -1,4 +1,4 @@
-class CreateVacls < ActiveRecord::Migration
+class CreateVacl < ActiveRecord::Migration
   def self.up
     create_table :vacls do |t|
       t.string :name

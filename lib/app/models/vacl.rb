@@ -69,7 +69,7 @@ class Vacl < ActiveRecord::Base
     VaclUser.find :all, :joins => { :vacl_group_memberships => { :vacl_permission_sets => :vacl_permissions } }, :conditions => "vacl_group_memberships.user_id=#{user.id} AND vacl_permissions.id = #{perm.id} AND vacl_grants.vacl_id = #{self.id}"
   end
 
-  named_scope :scope_default, :conditions => { :default_acl => true }
+  named_scope :scope_default, :conditions => { :default_vacl => true }
   named_scope :joins_with_memberships, lambda{ { :joins => { :vacl_groups => :vacl_group_memberships } } }
   named_scope :includes_user, lambda{ |u| { :joins => { :vacl_groups => :vacl_group_memberships }, :conditions => [ 'vacl_group_memberships.user_id = ?', u.id ] } }
   named_scope :includes_user_and_perm, lambda{ |u,p| { :joins => { :vacl_permission_sets => :vacl_permissions, :vacl_groups => :vacl_group_memberships }, :conditions => [ 'vacl_group_memberships.user_id = ? AND vacl_permissions.id = ?', u.id, p.id ] } }

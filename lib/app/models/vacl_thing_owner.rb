@@ -7,7 +7,7 @@ class VaclThingOwner < ActiveRecord::Base
 
   def set_default_acl()
 #    self.acl = creator.default_acl
-    self.acl = creator.my_default_acl
+    self.vacl = creator.my_default_acl
     self.save
   end
 

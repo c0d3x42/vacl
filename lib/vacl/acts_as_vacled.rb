@@ -31,7 +31,7 @@ module ActsAsVacled
         named_scope :has_perm, lambda{ |pid| { :conditions => { :vacl_permission_collections => { :vacl_permission_id => pid } } } }
 #        named_scope :has_read_perm, { :conditions => [ 'vacl_permission_collections.permission_id = ?', VaclPermission.find_by_name('read').id ] }
         #named_scope :by_user, lambda{ |uid| { :conditions => [ 'vacl_group_memberships.user_id = ?', uid ] } }
-        named_scope :by_user, lambda{ |uid| { :conditions => { :vacl_group_memberships => { :user_id => uid } } } }
+        named_scope :by_user, lambda{ |uid| { :conditions => { :vacl_group_memberships => { :vacl_user_id => uid } } } }
         named_scope :not_owned_by, lambda{ |uid| { :joins => :vacl, :conditions => [ "vacl_thing_owners.creator_id != ?", uid ] } }
     end
 
@@ -49,7 +49,7 @@ module ActsAsVacled
       scope_perm = "has_" + perm_name + "_perm"
       scope_perm = scope_perm.to_sym
       klass.class_eval do
-        named_scope scope_perm, { :conditions => [ "vacl_permission_collections.permission_id = #{p.id}" ] }
+        named_scope scope_perm, { :conditions => [ "vacl_permission_collections.vacl_permission_id = #{p.id}" ] }
       end
     }
 

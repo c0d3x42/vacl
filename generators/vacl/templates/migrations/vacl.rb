@@ -27,7 +27,7 @@ class CreateVacl < ActiveRecord::Migration
 
     create_table :vacl_group_memberships do |t|
       t.integer :vacl_group_id
-      t.integer :user_id
+      t.integer :vacl_user_id
 
       t.timestamps
     end
